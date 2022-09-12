@@ -3,7 +3,7 @@ import Router from 'next/router';
 import useSWR from 'swr';
 
 const fetcher = (url: string, init: RequestInit) =>
-  fetch(`http://localhost:4000/api/v1${url}`, {
+  fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1${url}`, {
     ...init,
     credentials: 'include',
   }).then((res) => res.json());

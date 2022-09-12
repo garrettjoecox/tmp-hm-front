@@ -14,7 +14,9 @@ const Auth: NextPage = () => {
             <span className="text-3xl font-black mt-2"> Harbour Masters </span>
           </div>
           <a
-            href={`http://localhost:4000/api/v1/auth?from=${encodeURIComponent('http://localhost:3000')}`}
+            href={`${process.env.NEXT_PUBLIC_BACKEND_URL!}/api/v1/auth?from=${encodeURIComponent(
+              process.env.NEXT_PUBLIC_FRONTEND_URL!
+            )}`}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow flex items-center"
           >
             <svg fill="#FFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px">
