@@ -4,12 +4,16 @@ import StatusPill from 'components/status-pill';
 import { ArrowDownTrayIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import Table, { TableHeader } from 'components/table';
 import { useMemo } from 'react';
+import useUser from 'lib/useUser';
 
 const MyConfigurations: NextPage = () => {
+  const { user } = useUser({
+    redirectTo: '/auth',
+  });
   const data = useMemo(
     () => [
       { id: '0', name: 'Steam Deck', info: '1.0.0', status: 'active', lastUpdated: new Date() },
-      { id: '0', name: 'Desktop', info: '1.0.0', status: 'active', lastUpdated: new Date() },
+      { id: '1', name: 'Desktop', info: '1.0.0', status: 'active', lastUpdated: new Date() },
       { id: '3', name: 'old', info: '1.0.0', status: 'archived', lastUpdated: sub(new Date(), { weeks: 5 }) },
       { id: '4', name: 'very old', info: '0.4.0', status: 'archived', lastUpdated: sub(new Date(), { weeks: 41 }) },
     ],
@@ -37,6 +41,7 @@ const MyConfigurations: NextPage = () => {
           renderCell: ({ item, tableHeader }) => (
             <td className={`py-3 px-6 whitespace-nowrap ${tableHeader.cellClassName}`}>
               <div className="flex items-center justify-center">
+                {/* @ts-ignore */}
                 <StatusPill status={item.status} />
               </div>
             </td>

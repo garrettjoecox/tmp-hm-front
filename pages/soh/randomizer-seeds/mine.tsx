@@ -4,8 +4,12 @@ import StatusPill from 'components/status-pill';
 import { ArrowDownTrayIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import Table, { TableHeader } from 'components/table';
 import { useMemo } from 'react';
+import useUser from 'lib/useUser';
 
 const MyRandomizerSeeds: NextPage = () => {
+  const { user } = useUser({
+    redirectTo: '/auth',
+  });
   const data = useMemo(
     () => [
       { id: '0', name: 'Hell mode', info: '18593', status: 'active', lastUpdated: new Date() },
@@ -50,6 +54,7 @@ const MyRandomizerSeeds: NextPage = () => {
           renderCell: ({ item, tableHeader }) => (
             <td className={`py-3 px-6 whitespace-nowrap ${tableHeader.cellClassName}`}>
               <div className="flex items-center justify-center">
+                {/* @ts-ignore */}
                 <StatusPill status={item.status} />
               </div>
             </td>

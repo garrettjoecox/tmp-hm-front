@@ -4,8 +4,12 @@ import StatusPill from 'components/status-pill';
 import { ArrowDownTrayIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import Table, { TableHeader } from 'components/table';
 import { useMemo } from 'react';
+import useUser from 'lib/useUser';
 
 const MyCloudSaves: NextPage = () => {
+  const { user } = useUser({
+    redirectTo: '/auth',
+  });
   const data = useMemo(
     () => [
       { id: '0', name: 'Test', info: 'Vanilla 1.0.0', status: 'active slot 1', lastUpdated: new Date() },
@@ -56,6 +60,7 @@ const MyCloudSaves: NextPage = () => {
           renderCell: ({ item, tableHeader }) => (
             <td className={`py-3 px-6 whitespace-nowrap ${tableHeader.cellClassName}`}>
               <div className="flex items-center justify-center">
+                {/* @ts-ignore */}
                 <StatusPill status={item.status} />
               </div>
             </td>
