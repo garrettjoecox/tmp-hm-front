@@ -6,6 +6,7 @@ const fakeOotSave1: OotSaveFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.0',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.SAVE,
   typeSpecific: {
@@ -25,6 +26,7 @@ const fakeOotSave2: OotSaveFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.SAVE,
   typeSpecific: {
@@ -44,6 +46,7 @@ const fakeOotSave3: OotSaveFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.SAVE,
   typeSpecific: {
@@ -63,6 +66,7 @@ const fakeOotConfiguration1: OotConfigurationFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.0',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.CONFIGURATION,
   blob: {
@@ -79,6 +83,7 @@ const fakeOotConfiguration2: OotConfigurationFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.CONFIGURATION,
   blob: {
@@ -95,6 +100,7 @@ const fakeOotConfiguration3: OotConfigurationFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.CONFIGURATION,
   blob: {
@@ -111,6 +117,7 @@ const fakeOotRandomizerSeed1: OotRandomizerSeedFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.0',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.RANDOMIZER_SEED,
   blob: {
@@ -128,6 +135,7 @@ const fakeOotRandomizerSeed2: OotRandomizerSeedFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.RANDOMIZER_SEED,
   blob: {
@@ -145,6 +153,7 @@ const fakeOotRandomizerSeed3: OotRandomizerSeedFile = {
   gameId: GameId.OOT,
   gameSpecific: {
     sohVersion: '1.0.2',
+    romVersion: 'Debug PAL GC',
   },
   type: FileType.RANDOMIZER_SEED,
   blob: {

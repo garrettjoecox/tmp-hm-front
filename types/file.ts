@@ -25,6 +25,7 @@ type OotBaseFile = BaseFile & {
   gameId: GameId.OOT;
   gameSpecific: {
     sohVersion: string;
+    romVersion: 'Debug PAL GC' | 'PAL GC';
   };
 };
 
