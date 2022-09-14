@@ -9,6 +9,7 @@ export enum FileType {
   SAVE = 'SAVE',
   CONFIGURATION = 'CONFIGURATION',
   RANDOMIZER_SEED = 'RANDOMIZER_SEED',
+  CRASH_LOG = 'CRASH_LOG',
 }
 
 type BaseFile = {
@@ -52,7 +53,12 @@ export type OotRandomizerSeedFile = OotBaseFile & {
   };
 };
 
-export type OotFile = OotSaveFile | OotConfigurationFile | OotRandomizerSeedFile;
+export type OotCrashLogFile = OotBaseFile & {
+  type: FileType.CRASH_LOG;
+  blob: string; // TODO: Zip file? dunno
+};
+
+export type OotFile = OotSaveFile | OotConfigurationFile | OotRandomizerSeedFile | OotCrashLogFile;
 
 type MmBaseFile = BaseFile & {
   gameId: GameId.MM;
@@ -66,6 +72,10 @@ export type MmConfigurationFile = MmBaseFile & {
   type: FileType.CONFIGURATION;
 };
 
-export type MmFile = MmSaveFile | MmConfigurationFile;
+export type MmCrashLogFile = MmBaseFile & {
+  type: FileType.CRASH_LOG;
+};
+
+export type MmFile = MmSaveFile | MmConfigurationFile | MmCrashLogFile;
 
 export type File = OotFile | MmFile;
