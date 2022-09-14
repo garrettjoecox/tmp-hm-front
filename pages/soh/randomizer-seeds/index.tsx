@@ -3,15 +3,18 @@ import { format, formatDistanceToNow, sub } from 'date-fns';
 import { ArrowDownTrayIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import Table, { TableHeader } from 'components/table';
 import { useMemo } from 'react';
-import useUser from 'lib/useUser';
 import useFiles from 'lib/useFiles';
-import { FileType, GameId, OotSaveFile } from 'types/file';
-import Link from 'next/link';
+import { FileType, GameId, OotRandomizerSeedFile } from 'types/file';
+import useEnsureRole from 'lib/useEnsureRole';
 import { UserRole } from 'types/user';
+import Link from 'next/link';
 
-const MyCloudSaves: NextPage = () => {
-  const { user } = useUser();
-  const { files } = useFiles<OotSaveFile>({ gameId: GameId.OOT, fileType: FileType.SAVE, userId: user?.id });
+const AllRandomizerSeeds: NextPage = () => {
+  useEnsureRole({ role: UserRole.MODERATOR, redirectTo: '/soh/randomizer-seeds/mine' });
+  const { files } = useFiles<OotRandomizerSeedFile>({
+    gameId: GameId.OOT,
+    fileType: FileType.RANDOMIZER_SEED,
+  });
 
   const headers = useMemo(
     () =>
@@ -34,7 +37,7 @@ const MyCloudSaves: NextPage = () => {
             <td className="py-3 px-6 whitespace-nowrap text-left">
               <div className="flex flex-col">
                 <span>SoH Version: {item.gameSpecific.sohVersion}</span>
-                <span>Save Format: {item.typeSpecific.saveFormat}</span>
+                <span>Seed: {item.blob.seed}</span>
               </div>
             </td>
           ),
@@ -75,16 +78,14 @@ const MyCloudSaves: NextPage = () => {
       <div className="flex items-center">
         <div>
           <h3 className="text-sm text-gray-700 uppercase">Ship of Harkinion</h3>
-          <h1 className="text-3xl font-bold mb-4">Cloud Saves</h1>
+          <h1 className="text-3xl font-bold mb-4">Randomizer Seeds</h1>
         </div>
         <div className="ml-auto">
-          {(user?.role || 0) >= UserRole.MODERATOR && (
-            <Link href="/soh/cloud-saves">
-              <a className="flex px-3 py-1 my-1 text-sm font-semibold items-center bg-gray-300 hover:bg-gray-200 rounded">
-                View All
-              </a>
-            </Link>
-          )}
+          <Link href="/soh/randomizer-seeds/mine">
+            <a className="flex px-3 py-1 my-1 text-sm font-semibold items-center bg-gray-300 hover:bg-gray-200 rounded">
+              View Mine
+            </a>
+          </Link>
         </div>
       </div>
 
@@ -93,4 +94,4 @@ const MyCloudSaves: NextPage = () => {
   );
 };
 
-export default MyCloudSaves;
+export default AllRandomizerSeeds;

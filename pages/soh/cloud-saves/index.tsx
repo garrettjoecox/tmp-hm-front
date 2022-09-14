@@ -3,15 +3,15 @@ import { format, formatDistanceToNow, sub } from 'date-fns';
 import { ArrowDownTrayIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import Table, { TableHeader } from 'components/table';
 import { useMemo } from 'react';
-import useUser from 'lib/useUser';
 import useFiles from 'lib/useFiles';
 import { FileType, GameId, OotSaveFile } from 'types/file';
-import Link from 'next/link';
+import useEnsureRole from 'lib/useEnsureRole';
 import { UserRole } from 'types/user';
+import Link from 'next/link';
 
-const MyCloudSaves: NextPage = () => {
-  const { user } = useUser();
-  const { files } = useFiles<OotSaveFile>({ gameId: GameId.OOT, fileType: FileType.SAVE, userId: user?.id });
+const AllCloudSaves: NextPage = () => {
+  useEnsureRole({ role: UserRole.MODERATOR, redirectTo: '/soh/cloud-saves/mine' });
+  const { files } = useFiles<OotSaveFile>({ gameId: GameId.OOT, fileType: FileType.SAVE });
 
   const headers = useMemo(
     () =>
@@ -78,13 +78,11 @@ const MyCloudSaves: NextPage = () => {
           <h1 className="text-3xl font-bold mb-4">Cloud Saves</h1>
         </div>
         <div className="ml-auto">
-          {(user?.role || 0) >= UserRole.MODERATOR && (
-            <Link href="/soh/cloud-saves">
-              <a className="flex px-3 py-1 my-1 text-sm font-semibold items-center bg-gray-300 hover:bg-gray-200 rounded">
-                View All
-              </a>
-            </Link>
-          )}
+          <Link href="/soh/cloud-saves/mine">
+            <a className="flex px-3 py-1 my-1 text-sm font-semibold items-center bg-gray-300 hover:bg-gray-200 rounded">
+              View Mine
+            </a>
+          </Link>
         </div>
       </div>
 
@@ -93,4 +91,4 @@ const MyCloudSaves: NextPage = () => {
   );
 };
 
-export default MyCloudSaves;
+export default AllCloudSaves;

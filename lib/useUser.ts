@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
 import Router from 'next/router';
 import useSWR from 'swr';
+import fetcher from './fetcher';
+import { User, UserRole } from 'types/user';
 
-const fetcher = (url: string, init: RequestInit) =>
-  fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1${url}`, {
-    ...init,
-    credentials: 'include',
-  }).then((res) => res.json());
+export default function useUser({ redirectTo = '/auth', redirectIfFound = false } = {}) {
+  const { data: user, error } = useSWR<User>('/auth/me', fetcher);
 
-export default function useUser({ redirectTo = '', redirectIfFound = false } = {}) {
-  const { data: user, error } = useSWR<any>('/auth/me', fetcher);
+  // Temporary until roles are added to user
+  useEffect(() => {
+    if (user) {
+      user.role = UserRole.ADMINISTRATOR;
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!redirectTo || (!user && !error)) return;
